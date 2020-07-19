@@ -5,7 +5,7 @@ using Tokenize
 using DataStructures
 using Pkg.TOML: parsefile
 
-export format, format_text, format_file, DefaultStyle, YASStyle
+export format, format_text, format_file, DefaultStyle, YASStyle, DocumentFormatStyle
 
 abstract type AbstractStyle end
 
@@ -27,11 +27,16 @@ include("options.jl")
 include("state.jl")
 include("fst.jl")
 include("passes.jl")
-include("pretty.jl")
-include("nest.jl")
-include("print.jl")
 
-include("styles/yas.jl")
+# styles
+include("styles/default/pretty.jl")
+include("styles/default/nest.jl")
+include("styles/yas/pretty.jl")
+include("styles/yas/nest.jl")
+include("styles/documentformat/pretty.jl")
+include("styles/documentformat/nest.jl")
+
+include("print.jl")
 
 # on Windows lines can end in "\r\n"
 normalize_line_ending(s::AbstractString) = replace(s, "\r\n" => "\n")
